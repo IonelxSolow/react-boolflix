@@ -1,13 +1,25 @@
 import './App.css';
-import { GlobalProvider } from './context/GlobalContext';
+import { GlobalContextProvider } from './context/GlobalContext.jsx';
+import SearchBar from './components/SearchBar';
 
 function App() {
+  const handleSearch = (query) => {
+    console.log('Searching for:', query);
+    
+    function handleSearch(e) {
+      e.preventDefault();
+      onSearch(searchQuery);
+    }
+
+  };
+
   return (
-    <GlobalProvider>
-      <>
-        <h1>React Boolflix</h1>
-      </>
-    </GlobalProvider>
+    <GlobalContextProvider>
+      <div className="app-container">
+        <h1>React-Boolflix</h1>
+        <SearchBar onSearch={handleSearch} />
+      </div>
+    </GlobalContextProvider>
   );
 }
 
