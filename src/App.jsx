@@ -1,13 +1,14 @@
-import './App.css'
+import './App.css';
+import { GlobalProvider } from './context/GlobalContext';
 
 function App() {
- 
-
   return (
-    <>
-    <h1>React Boolflix</h1>
-    </>
-  )
+    <GlobalProvider>
+      <>
+        <h1>React Boolflix</h1>
+      </>
+    </GlobalProvider>
+  );
 }
 
-export default App
+export default App;
