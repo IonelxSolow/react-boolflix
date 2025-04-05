@@ -19,10 +19,21 @@ export const MoviesProvider = ({ children }) => {
             });
     }, []); 
 
+    const searchMovies = () => {
+        if (!searchText) return;
+        
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchText}`)
+            .then((res) => res.json())
+            .then(({ results }) => {
+                setMovies(results);
+            });
+    };
+
     const values = {
         movies,
         searchText,
-        setSearchText
+        setSearchText,
+        searchMovies
     };
 
     return (
