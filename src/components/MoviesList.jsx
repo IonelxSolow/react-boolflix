@@ -1,11 +1,11 @@
 import { useMovies } from "../context/GlobalContext";
 
 function MoviesList() {
-    const { movies, searchText, setSearchText, searchMovies } = useMovies();
+    const { contents, searchText, setSearchText, searchContents } = useMovies();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        searchMovies();
+        searchContents();
     };
 
     return (
@@ -16,7 +16,7 @@ function MoviesList() {
                         type="text" 
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
-                        placeholder="Cerca un film..."
+                        placeholder="Cerca un film o una serie TV..."
                         className="form-control"
                     />
                     <button 
@@ -29,18 +29,21 @@ function MoviesList() {
             </form>
 
             <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-                {movies.map((movie) => (
-                    <div key={movie.id} className="col">
+                {contents.map((item) => (
+                    <div key={item.id} className="col">
                         <div className="card h-100">
-                         
+                            
                             <div className="card-body">
-                                <h5 className="card-title">{movie.title}</h5>
-                                <h6 className="card-subtitle mb-2 text-muted">{movie.original_title}</h6>
+                                <span className="badge bg-primary mb-2">
+                                    {item.media_type === 'movie' ? 'Film' : 'Serie TV'}
+                                </span>
+                                <h5 className="card-title">{item.title}</h5>
+                                <h6 className="card-subtitle mb-2 text-muted">{item.original_title}</h6>
                                 <p className="card-text">
                                     <small className="text-muted">
-                                        Lingua: {movie.original_language}
+                                        Lingua: {item.original_language}
                                         <br />
-                                        Voto: {movie.vote_average}/10
+                                        Voto: {item.vote_average}/10
                                     </small>
                                 </p>
                             </div>
