@@ -1,15 +1,26 @@
 import { useMovies } from "../context/GlobalContext";
 import LanguageFlag from "./LanguageFlag";
 import StarRating from "./StarRating";
+import GenreFilter from "./GenreFilter";
 import "./../styles/MoviesList.css";
 
 function MoviesList() {
-  const { contents } = useMovies();
+  const { contents, selectedGenres, movieGenres, tvGenres } = useMovies();
+
+  const filteredContents = contents.filter(item => {
+    if (selectedGenres.length === 0) return true;
+    const itemGenres = item.genres.split(", ").map(genre => {
+      const foundGenre = movieGenres.find(g => g.name === genre) || tvGenres.find(g => g.name === genre);
+      return foundGenre?.id;
+    });
+    return selectedGenres.some(genreId => itemGenres.includes(genreId));
+  });
 
   return (
     <div id="results-section" className="container py-5">
+      <GenreFilter />
       <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        {contents.map((item) => (
+        {filteredContents.map((item) => (
           <div key={item.id} className="col">
             <div
               className="movie-card"
@@ -32,6 +43,16 @@ function MoviesList() {
                   </small>
                 </p>
                 <p className="overview">{item.overview}</p>
+                {item.genres && (
+                  <p className="genres">
+                    <strong>Generi:</strong> {item.genres}
+                  </p>
+                )}
+                {item.cast && (
+                  <p className="cast">
+                    <strong>Cast:</strong> {item.cast}
+                  </p>
+                )}
               </div>
             </div>
           </div>

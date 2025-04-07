@@ -23,6 +23,13 @@
   transition: opacity 0.3s ease;
   overflow-y: auto;
   color: white;
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.movie-info::-webkit-scrollbar {
+  display: none;
 }
 
 .movie-card:hover .movie-info {
