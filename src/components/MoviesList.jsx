@@ -1,32 +1,13 @@
 import { useMovies } from "../context/GlobalContext";
 import LanguageFlag from "./LanguageFlag";
 import MoviePoster from "./MoviePoster";
+import StarRating from "./StarRating";
 
 function MoviesList() {
-  const { contents, searchText, setSearchText, searchContents } = useMovies();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    searchContents();
-  };
+  const { contents } = useMovies();
 
   return (
-    <div className="container py-5">
-      <form onSubmit={handleSubmit} className="row justify-content-center mb-4">
-        <div className="col-md-6 d-flex gap-2">
-          <input
-            type="text"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            placeholder="Cerca un film o una serie TV..."
-            className="form-control"
-          />
-          <button type="submit" className="btn btn-primary">
-            Cerca
-          </button>
-        </div>
-      </form>
-
+    <div id="results-section" className="container py-5">
       <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
         {contents.map((item) => (
           <div key={item.id} className="col">
@@ -48,7 +29,7 @@ function MoviesList() {
                   <small className="text-muted">
                     Lingua: <LanguageFlag language={item.original_language} />
                     <br />
-                    Voto: {item.vote_average}/10
+                    Voto: <StarRating vote={item.vote_average} />
                   </small>
                 </p>
               </div>
