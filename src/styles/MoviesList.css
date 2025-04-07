@@ -1,0 +1,35 @@
+.movie-card {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow-y: auto;
+  color: white;
+}
+
+.movie-card:hover .movie-info {
+  opacity: 1;
+}
+
+.overview {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
