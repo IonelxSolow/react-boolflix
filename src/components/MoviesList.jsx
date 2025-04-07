@@ -1,5 +1,6 @@
 import { useMovies } from "../context/GlobalContext";
 import LanguageFlag from "./LanguageFlag";
+import MoviePoster from "./MoviePoster";
 
 function MoviesList() {
   const { contents, searchText, setSearchText, searchContents } = useMovies();
@@ -30,6 +31,11 @@ function MoviesList() {
         {contents.map((item) => (
           <div key={item.id} className="col">
             <div className="card h-100">
+              <MoviePoster 
+                path={item.poster_path}
+                title={item.title}
+                size="medium"
+              />
               <div className="card-body">
                 <span className="badge bg-primary mb-2">
                   {item.media_type === "movie" ? "Film" : "Serie TV"}
